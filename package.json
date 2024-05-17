@@ -1,0 +1,19 @@
+{
+  "name": "sly-altercode",
+  "version": "0.0.1",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "altercode": "./altercode.es.js"
+  },
+  "scripts": {
+    "build:source": "rollup --config ./rollup.config.js",
+    "copy:files": "cp package.json dist/ && cp README.md dist/",
+    "build": "npm run build:source && npm run copy:files"
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.17.2"
+  }
+}
