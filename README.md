@@ -39,3 +39,5 @@ You're all set. Now run the assist command to process your code shift tasks
 ``` 
 npm run assist
 ```
+## License
+This project is licensed under the MIT license. See the LICENSE file for more info.

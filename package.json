@@ -11,6 +11,16 @@
     "copy:files": "cp package.json dist/ && cp README.md dist/",
     "build": "npm run build:source && npm run copy:files"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opensly/sly-altercode.git"
+  },
+  "author": "Lakshmikanth Vallampati",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/opensly/sly-altercode/issues"
+  },
+  "homepage": "https://github.com/opensly/sly-altercode#readme",
   "devDependencies": {
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-terser": "^0.4.4",
