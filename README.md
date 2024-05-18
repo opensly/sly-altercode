@@ -12,7 +12,19 @@ npm i sly-altercode --save-dev
 Create a config file named `altercode.config.json` at the root level of your repository.
 ```
 {
-  "sourceDir": "./src/app"
+  "sourceDir": "./src/app",
+  "excludeExtns": [".test.ts", ".enum.ts", ".constants.ts", ...]
+  "mutations": [
+    { 
+      "searchString": "page-wrapper", 
+      "replaceWith": "page-container" 
+    },
+    { 
+      "searchString": "...", 
+      "replaceWith": "..." 
+    },
+    ...
+  ]
 }
 ```
 
