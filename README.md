@@ -1,6 +1,6 @@
 # Altercode
 
-Altercode is a simple node based CLI tool/library to assist you with large-scale code shift that can be partially automated but still require human oversight and occasional intervention. Altercode is completely open source and free to use.
+Altercode is a node based CLI toolkit to assist you with code shift.
 
 ## Usage
 

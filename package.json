@@ -1,6 +1,15 @@
 {
   "name": "sly-altercode",
-  "version": "0.0.1",
+  "description": "Altercode is a node based CLI toolkit to assist you with code shift.",
+  "version": "0.0.2",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opensly/sly-altercode.git"
+  },
+  "keywords": [
+    "codeshift",
+    "jscodeshift"
+  ],
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -11,19 +20,18 @@
     "copy:files": "cp package.json dist/ && cp README.md dist/",
     "build": "npm run build:source && npm run copy:files"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/opensly/sly-altercode.git"
-  },
-  "author": "Lakshmikanth Vallampati",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/opensly/sly-altercode/issues"
-  },
-  "homepage": "https://github.com/opensly/sly-altercode#readme",
   "devDependencies": {
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^4.17.2"
+  },
+  "homepage": "https://github.com/opensly/sly-altercode#readme",
+  "bugs": {
+    "url": "https://github.com/opensly/sly-altercode/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Lakshmikanth Vallampati",
+    "url": "https://github.com/kanthvallampati/"
   }
 }
