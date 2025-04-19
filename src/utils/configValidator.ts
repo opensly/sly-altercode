@@ -1,10 +1,12 @@
+import { CodemodConfig } from '../types';
+
 /**
  * Validates the configuration object
- * @param {Object} config - The configuration object
- * @returns {Array} - Array of error messages, empty if valid
+ * @param {CodemodConfig} config - The configuration object
+ * @returns {Array<string>} - Array of error messages, empty if valid
  */
-export function validateConfig(config) {
-  const errors = [];
+export function validateConfig(config: CodemodConfig): string[] {
+  const errors: string[] = [];
   
   if (!config) {
     errors.push('Configuration is empty or invalid');
