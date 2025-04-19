@@ -8,7 +8,7 @@ import { CodemodConfig, ProcessingResults } from './types';
 
 // Get command-line arguments
 const args = process.argv.slice(2);
-const configPath = args[1] || './codemod.config.json';
+const configPath = args[1] || './altercode.config.json';
 const isDryRun = args.includes('--dry-run') || args.includes('-d');
 
 // Banner
