@@ -1,17 +1,18 @@
 import * as fs from 'fs';
 import { join } from 'path';
 import path from 'path';
+import { CodemodConfig } from '../types';
 
 export default class Crawler {
-  config;
-  requiredFiles = [];
+  private config: CodemodConfig;
+  public requiredFiles: string[] = [];
   
-  constructor(config) {
+  constructor(config: CodemodConfig) {
     this.config = config;
     this.getFilesOfDir(this.config.sourceDir);
   }
   
-  getFilesOfDir(dir) {
+  private getFilesOfDir(dir: string): void {
     try {
       if (!fs.existsSync(dir)) {
         console.error(`Directory does not exist: ${dir}`);
@@ -33,22 +34,22 @@ export default class Crawler {
           } else if (this.isFileAllowed(f)) {
             this.requiredFiles.push(f);
           }
-        } catch (fileErr) {
+        } catch (fileErr: any) {
           console.warn(`Warning: Could not process ${f}: ${fileErr.message}`);
         }
       });
-    } catch (dirErr) {
+    } catch (dirErr: any) {
       console.error(`Error reading directory ${dir}: ${dirErr.message}`);
     }
   }
   
-  isDirectoryExcluded(dir) {
+  private isDirectoryExcluded(dir: string): boolean {
     const excludeDirs = this.config.excludeDirs || ['node_modules', '.git', 'dist', 'build'];
     const dirName = path.basename(dir);
     return excludeDirs.includes(dirName);
   }
   
-  isFileAllowed(file) {
+  private isFileAllowed(file: string): boolean {
     const excludeExtns = this.config.excludeExtns || [];
     const includeExtns = this.config.includeExtns || [];
     
