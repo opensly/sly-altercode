@@ -4,6 +4,7 @@ import { join } from 'path';
 import Crawler from './crawler/crawler';
 import FileProcessor from './processor/processor';
 import { validateConfig } from './utils/configValidator';
+import { CodemodConfig, ProcessingResults } from './types';
 
 // Get command-line arguments
 const args = process.argv.slice(2);
@@ -12,11 +13,11 @@ const isDryRun = args.includes('--dry-run') || args.includes('-d');
 
 // Banner
 console.log('\n===============================');
-console.log('🛠          ALTERCODE         🛠');
+console.log('🛠      ALTERCODE       🛠');
 console.log('===============================\n');
 
 // Main execution
-async function run() {
+async function run(): Promise<void> {
   try {
     console.log(`Loading config from: ${configPath}`);
     
@@ -27,7 +28,7 @@ async function run() {
     
     // Read and parse config
     const data = fs.readFileSync(configPath, 'utf8');
-    const appConfig = JSON.parse(data);
+    const appConfig: CodemodConfig = JSON.parse(data);
     
     // Validate config
     const configErrors = validateConfig(appConfig);
@@ -75,7 +76,7 @@ async function run() {
       console.log('Run without the --dry-run flag to apply changes');
     }
     
-  } catch (err) {
+  } catch (err: any) {
     console.error(`\n❌ Error: ${err.message}`);
     process.exit(1);
   }
