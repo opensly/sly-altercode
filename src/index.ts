@@ -4,7 +4,7 @@ import { join } from 'path';
 import Crawler from './crawler/crawler';
 import FileProcessor from './processor/processor';
 import { validateConfig } from './utils/configValidator';
-import { CodemodConfig, ProcessingResults } from './types';
+import { AltercodeConfig, ProcessingResults } from './types';
 
 // Get command-line arguments
 const args = process.argv.slice(2);
@@ -28,7 +28,7 @@ async function run(): Promise<void> {
     
     // Read and parse config
     const data = fs.readFileSync(configPath, 'utf8');
-    const appConfig: CodemodConfig = JSON.parse(data);
+    const appConfig: AltercodeConfig = JSON.parse(data);
     
     // Validate config
     const configErrors = validateConfig(appConfig);
