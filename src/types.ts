@@ -4,7 +4,7 @@ export interface Mutation {
   useRegex?: boolean;
 }
 
-export interface CodemodConfig {
+export interface AltercodeConfig {
   sourceDir: string;
   excludeExtns?: string[];
   includeExtns?: string[];
