@@ -2,10 +2,10 @@ import { CodemodConfig } from '../types';
 
 /**
  * Validates the configuration object
- * @param {CodemodConfig} config - The configuration object
+ * @param {AltercodeConfig} config - The configuration object
  * @returns {Array<string>} - Array of error messages, empty if valid
  */
-export function validateConfig(config: CodemodConfig): string[] {
+export function validateConfig(config: AltercodeConfig): string[] {
   const errors: string[] = [];
   
   if (!config) {
