@@ -1,19 +1,20 @@
 import { promises as fs } from 'fs';
 import { escapeRegExp } from '../utils/stringUtils';
+import { Mutation, ProcessingResults, ProcessingError } from '../types';
 
 export default class FileProcessor {
-  files;
-  replacements;
-  dryRun;
+  private files: string[];
+  private replacements: Mutation[];
+  private dryRun: boolean;
   
-  constructor(files, replacements, dryRun = false) {
+  constructor(files: string[], replacements: Mutation[], dryRun = false) {
     this.files = files;
     this.replacements = replacements;
     this.dryRun = dryRun;
   }
   
-  async findAndReplaceInFiles() {
-    const results = {
+  async findAndReplaceInFiles(): Promise<ProcessingResults> {
+    const results: ProcessingResults = {
       totalFiles: this.files.length,
       modifiedFiles: 0,
       totalReplacements: 0,
@@ -29,13 +30,13 @@ export default class FileProcessor {
         
         // Process each replacement
         for (const { searchString, replaceWith, useRegex = false } of this.replacements) {
-          let pattern;
+          let pattern: RegExp;
           
           // Create regex pattern safely
           if (useRegex) {
             try {
               pattern = new RegExp(searchString, 'g');
-            } catch (regexError) {
+            } catch (regexError: any) {
               results.errors.push({
                 file,
                 message: `Invalid regex pattern: ${regexError.message}`
@@ -64,7 +65,7 @@ export default class FileProcessor {
           results.modifiedFiles++;
           console.log(`✓ ${this.dryRun ? 'Would modify' : 'Modified'} ${file} (${fileReplacements} replacements)`);
         }
-      } catch (err) {
+      } catch (err: any) {
         results.errors.push({
           file,
           message: err.message
