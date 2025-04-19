@@ -1,27 +1,78 @@
-// Import dependencies
 import { promises as fs } from 'fs';
+import { escapeRegExp } from '../utils/stringUtils';
 
 export default class FileProcessor {
   files;
   replacements;
-
-  constructor(files, replacements) {
+  dryRun;
+  
+  constructor(files, replacements, dryRun = false) {
     this.files = files;
     this.replacements = replacements;
+    this.dryRun = dryRun;
   }
-
+  
   async findAndReplaceInFiles() {
+    const results = {
+      totalFiles: this.files.length,
+      modifiedFiles: 0,
+      totalReplacements: 0,
+      errors: []
+    };
+    
     for (const file of this.files) {
       try {
-        let data = await fs.readFile(file, 'utf8'); // Read the file content
-        for (const { searchString, replaceWith } of this.replacements) {
-          data = data.replace(new RegExp(searchString, 'g'), replaceWith); // Replace each string
+        // Read the file content
+        let data = await fs.readFile(file, 'utf8');
+        let originalData = data;
+        let fileReplacements = 0;
+        
+        // Process each replacement
+        for (const { searchString, replaceWith, useRegex = false } of this.replacements) {
+          let pattern;
+          
+          // Create regex pattern safely
+          if (useRegex) {
+            try {
+              pattern = new RegExp(searchString, 'g');
+            } catch (regexError) {
+              results.errors.push({
+                file,
+                message: `Invalid regex pattern: ${regexError.message}`
+              });
+              continue;
+            }
+          } else {
+            pattern = new RegExp(escapeRegExp(searchString), 'g');
+          }
+          
+          // Count replacements in this file for this pattern
+          const matches = data.match(pattern);
+          const matchCount = matches ? matches.length : 0;
+          
+          // Replace content
+          data = data.replace(pattern, replaceWith);
+          fileReplacements += matchCount;
+          results.totalReplacements += matchCount;
         }
-        await fs.writeFile(file, data, 'utf8'); // Write the updated content back to the file
-        console.log(`Successfully updated ${file}`);
+        
+        // Only consider a file modified if content changed
+        if (data !== originalData) {
+          if (!this.dryRun) {
+            await fs.writeFile(file, data, 'utf8');
+          }
+          results.modifiedFiles++;
+          console.log(`✓ ${this.dryRun ? 'Would modify' : 'Modified'} ${file} (${fileReplacements} replacements)`);
+        }
       } catch (err) {
-        console.error(`Error processing file ${file}:`, err);
+        results.errors.push({
+          file,
+          message: err.message
+        });
+        console.error(`❌ Error processing file ${file}: ${err.message}`);
       }
     }
+    
+    return results;
   }
 }
