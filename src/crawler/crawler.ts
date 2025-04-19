@@ -1,13 +1,13 @@
 import * as fs from 'fs';
 import { join } from 'path';
 import path from 'path';
-import { CodemodConfig } from '../types';
+import { AltercodeConfig } from '../types';
 
 export default class Crawler {
-  private config: CodemodConfig;
+  private config: AltercodeConfig;
   public requiredFiles: string[] = [];
   
-  constructor(config: CodemodConfig) {
+  constructor(config: AltercodeConfig) {
     this.config = config;
     this.getFilesOfDir(this.config.sourceDir);
   }
