@@ -1,33 +1,39 @@
 {
   "name": "sly-altercode",
   "version": "0.0.2",
-  "description": "TypeScript codemod tool for automated code transformations",
+  "description": "A TypeScript-based tool for automated code transformations",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "bin": {
     "altercode": "dist/index.js"
   },
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --emitDeclarationOnly && node build.js",
+    "check": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "start": "node dist/index.js",
-    "dev": "tsc --watch"
+    "start": "node dist/index.js"
   },
   "keywords": [
     "codemod",
     "refactor",
-    "typescript"
+    "typescript",
+    "code-transformation",
+    "automation"
   ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.8.0",
+    "esbuild": "^0.20.1",
     "typescript": "^5.2.2"
   },
   "files": [
     "dist",
     "README.md",
     "LICENSE"
-  ]
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  }
 }
