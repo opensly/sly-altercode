@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "NodeNext", 
+    "moduleResolution": "Node", // Changed from "NodeNext" to "Node"
     "esModuleInterop": true,
     "outDir": "./dist",
     "rootDir": "./src",
