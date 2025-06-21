@@ -21,7 +21,10 @@
     "code-transformation",
     "automation"
   ],
-  "author": "",
+  "author": {
+    "name": "Lakshmikanth Vallampati",
+    "url": "https://github.com/kanthvallampati/"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.8.0",
